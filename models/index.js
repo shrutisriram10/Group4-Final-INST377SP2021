@@ -1,11 +1,11 @@
-import DietaryRestrictions from './DietaryRestrictions.js';
-import DiningHall from './DiningHall.js';
-import Macros from './Macros.js';
-import Meals from './Meals.js';
+import demo from './demo.js';
+import pollution from './pollution.js';
+import development from './development.js';
+import environment_conditions from './environment_conditions.js';
 
 export default {
-  DietaryRestrictions,
-  DiningHall,
-  Macros,
-  Meals
+  demo,
+  pollution,
+  development,
+  environment_conditions
 };

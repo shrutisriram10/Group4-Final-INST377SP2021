@@ -7,16 +7,16 @@ import db from '../database/initializeDB.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.send('Welcome to the UMD Dining API!');
+  res.send('Welcome to the GROUP 4 Air Pollution APP!');
 });
 
 /// /////////////////////////////////
-/// ////Dining Hall Endpoints////////
+/// ////Demgraphics Endpoints////////
 /// /////////////////////////////////
-router.get('/dining', async (req, res) => {
+router.get('/demo', async (req, res) => {
   try {
-    const halls = await db.DiningHall.findAll();
-    const reply = halls.length > 0 ? { data: halls } : { message: 'no results found' };
+    const demos = await db.demo.findAll();
+    const reply = demos.length > 0 ? { data: demos } : { message: 'no results found' };
     res.json(reply);
   } catch (err) {
     console.error(err);
@@ -24,44 +24,44 @@ router.get('/dining', async (req, res) => {
   }
 });
 
-router.get('/dining/:hall_id', async (req, res) => {
+router.get('/demo/:demo_id', async (req, res) => {
   try {
-    const hall = await db.DiningHall.findAll({
+    const demo = await db.demo.findAll({
       where: {
-        hall_id: req.params.hall_id
+        demo_id: req.params.demo_id
       }
     });
 
-    res.json(hall);
+    res.json(demo);
   } catch (err) {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.post('/dining', async (req, res) => {
-  const halls = await db.DiningHall.findAll();
-  const currentId = (await halls.length) + 1;
+router.post('/demo', async (req, res) => {
+  const demos = await db.demo.findAll();
+  const currentId = (await demos.length) + 1;
   try {
-    const newDining = await db.DiningHall.create({
-      hall_id: currentId,
-      hall_name: req.body.hall_name,
-      hall_address: req.body.hall_address,
-      hall_lat: req.body.hall_lat,
-      hall_long: req.body.hall_long
+    const newDemo = await db.demo.create({
+      demo_id: currentId,
+      race: req.body.race,
+      religion: req.body.religion,
+      annual_income: req.body.annual_income,
+      gender_ratio: req.body.gender_ratio
     });
-    res.json(newDining);
+    res.json(newDemo);
   } catch (err) {
     console.error(err);
     res.error('Server error');
   }
 });
 
-router.delete('/dining/:hall_id', async (req, res) => {
+router.delete('/demo/:hall_id', async (req, res) => {
   try {
-    await db.DiningHall.destroy({
+    await db.demo.destroy({
       where: {
-        hall_id: req.params.hall_id
+        demo_id: req.params.demo_id
       }
     });
     res.send('Successfully Deleted');
@@ -71,16 +71,16 @@ router.delete('/dining/:hall_id', async (req, res) => {
   }
 });
 
-router.put('/dining', async (req, res) => {
+router.put('/demo', async (req, res) => {
   try {
-    await db.DiningHall.update(
+    await db.demo.update(
       {
-        hall_name: req.body.hall_name,
-        hall_location: req.body.hall_location
+        race: req.body.race,
+        religion: req.body.religion
       },
       {
         where: {
-          hall_id: req.body.hall_id
+          demo_id: req.body.demo_id
         }
       }
     );
@@ -90,6 +90,10 @@ router.put('/dining', async (req, res) => {
     res.error('Server error');
   }
 });
+
+/* Everything past here needs to be changed to point to OUR database, not the dining hall database that it 
+// is currently pointing
+*/
 
 /// /////////////////////////////////
 /// ////////Meals Endpoints//////////
