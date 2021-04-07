@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   const pollution = sequelize.define(
-    "pollution",
+    'pollution',
     {
       pollution_id: {
         type: DataTypes.INTEGER,

@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   const environment_conditions = sequelize.define(
-    'environment_conditions',
+    'env_cond',
     {
       env_id: {
         type: DataTypes.INTEGER,
