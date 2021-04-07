@@ -115,26 +115,8 @@ router.get('/meals/:meal_id', async (req, res) => {
         meal_id: req.params.meal_id
       }
     });
-
+    
     res.json(meals);
-  } catch (err) {
-    console.error(err);
-    res.error('Server error');
-  }
-});
-
-router.post('/meals', async (req, res) => {
-  const demos = await db.Meals.findAll();
-  const currentId = (await meals.length) + 1;
-  try {
-    const newMeals = await db.meals.create({
-      meal_id: currentId,
-      race: req.body.race,
-      religion: req.body.religion,
-      annual_income: req.body.annual_income,
-      gender_ratio: req.body.gender_ratio
-    });
-    res.json(newMeals);
   } catch (err) {
     console.error(err);
     res.error('Server error');
